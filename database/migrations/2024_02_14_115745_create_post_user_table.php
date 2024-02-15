@@ -10,15 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('post_user', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->integer('author_id');
-            $table->integer('category_id');
-            $table->string('title');
-            $table->text('body');
-            $table->string('image')->nullable();
-            $table->boolean('status');
+            $table->integer('post_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('post_user');
     }
 };

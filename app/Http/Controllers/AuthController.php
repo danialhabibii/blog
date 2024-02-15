@@ -13,11 +13,6 @@ use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:sanctum')->only(['logout']);
-    }
-
     public function register(RegistrationRequest $request, RegistrationAction $registrationAction)
     {
         $registrationAction->execute($request->validated());
@@ -32,11 +27,5 @@ class AuthController extends Controller
             return Response::error($e->getMessage(), 403);
         }
         return AuthTokenResource::make($token);
-    }
-
-    public function logout(Request $request, LogoutAction $logoutAction)
-    {
-        $logoutAction->execute($request->user());
-        return Response::success('Successfully logged out.');
     }
 }

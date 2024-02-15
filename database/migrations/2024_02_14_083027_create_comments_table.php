@@ -10,15 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->integer('author_id');
-            $table->integer('category_id');
-            $table->string('title');
+            $table->integer('user_id');
             $table->text('body');
-            $table->string('image')->nullable();
-            $table->boolean('status');
+            $table->integer('commentable_id');
+            $table->string('commentable_type');
+            $table->integer('parent_id')->nullable();
+            $table->boolean('approved')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
 };
